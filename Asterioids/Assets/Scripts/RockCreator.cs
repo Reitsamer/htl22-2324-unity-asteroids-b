@@ -87,14 +87,14 @@ public class RockCreator : MonoBehaviour
         pc.SetPath(0, positions2d);
     }
     
-    private void OnValidate()
-    {
-        lr = GetComponent<LineRenderer>();
-        // mc = GetComponent<MeshCollider>();
-        pc = GetComponent<PolygonCollider2D>();
-
-
-        GenerateGeometry();
-        GenerateCollider();
-    }
+    // private void OnValidate()
+    // {
+    //     lr = GetComponent<LineRenderer>();
+    //     // mc = GetComponent<MeshCollider>();
+    //     pc = GetComponent<PolygonCollider2D>();
+    //
+    //
+    //     GenerateGeometry();
+    //     GenerateCollider();
+    // }
 }

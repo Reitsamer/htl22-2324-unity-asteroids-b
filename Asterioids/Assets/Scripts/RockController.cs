@@ -3,19 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(LineRenderer))]
-public class RockController : MonoBehaviour
+public class RockController : Moveable
 {
-    [SerializeField] private Vector3 direction;
+    public Vector3 direction;
 
     [SerializeField] private float speed;
 
-    private float Left => Camera.main.ViewportToWorldPoint(Vector3.zero).x;
-    private float Right => Camera.main.ViewportToWorldPoint(Vector3.right).x;
-    private float Top => Camera.main.ViewportToWorldPoint(Vector3.up).y;
-    private float Bottom => Camera.main.ViewportToWorldPoint(Vector3.zero).y - lr.bounds.size.y * 0.5f;
-
+    // [SerializeField] private Transform rockPrefab;
+    
     private float SpawnLeft => Left - lr.bounds.size.x * 0.5f;
     private float SpawnRight => Right + lr.bounds.size.x * 0.5f;
     private float SpawnTop => Top + lr.bounds.size.y * 0.5f;
@@ -66,5 +64,18 @@ public class RockController : MonoBehaviour
             (transform.position.y + SpawnTop + ScreenHeight) % ScreenHeight - SpawnTop,
             transform.position.z
         );
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.tag.Equals("Bullet"))
+            return;
+        
+        Destroy(other.transform.gameObject);
+
+        Instantiate(transform, transform.position, Quaternion.identity);
+        Instantiate(transform, transform.position, Quaternion.identity);
+        
+        Destroy(transform.gameObject);
     }
 }

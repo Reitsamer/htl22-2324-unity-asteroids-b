@@ -5,6 +5,8 @@ using UnityEngine;
 public class SpaceshipController : MonoBehaviour
 {
     public float speed = 1;
+
+    [SerializeField] private Transform bullet;
     
     // Start is called before the first frame update
     void Start()
@@ -24,5 +26,14 @@ public class SpaceshipController : MonoBehaviour
         
         if (Input.GetKey(KeyCode.RightArrow))
             transform.Rotate(Vector3.forward, -speed * Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            LineRenderer lr = GetComponent<LineRenderer>();
+            Vector3 position = lr.GetPosition(0);
+
+            var thePosition = transform.TransformPoint(position);
+            Instantiate(bullet, thePosition, transform.rotation);
+        }
     }
 }
