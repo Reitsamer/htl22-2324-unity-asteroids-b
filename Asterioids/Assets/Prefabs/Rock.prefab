@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3231339082315047307
+--- !u!1 &9032371507964214313
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7859073449012010396}
-  - component: {fileID: 4902814079889215390}
-  - component: {fileID: 769428911241895728}
-  - component: {fileID: 1660461546463251099}
+  - component: {fileID: 9032371507964214312}
+  - component: {fileID: 9032371507964214315}
+  - component: {fileID: 9032371507964214317}
+  - component: {fileID: 9032371507964214314}
+  - component: {fileID: 9032371507964214316}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -19,29 +20,60 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7859073449012010396
+--- !u!4 &9032371507964214312
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3231339082315047307}
+  m_GameObject: {fileID: 9032371507964214313}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 16.33, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!120 &4902814079889215390
+--- !u!114 &9032371507964214315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9032371507964214313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e4ddba401e1dd4f9205b173729283c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vertices: 7
+  threshold: 4
+  speed: 0.3
+  startSize: 3
+  RockPrefab: {fileID: 9032371507964214313}
+--- !u!114 &9032371507964214317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9032371507964214313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7f9004db63214408dec9c2f7ad44f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 5
+  Accel: 2
+--- !u!120 &9032371507964214314
 LineRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3231339082315047307}
+  m_GameObject: {fileID: 9032371507964214313}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -55,7 +87,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: caac8d60fae634d2b8451d6d8096e2c6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,14 +109,13 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 14.21, y: 3, z: 0}
-  - {x: 13.153979, y: 17.396622, z: 0}
-  - {x: -0.7693701, y: 16.440628, z: 0}
-  - {x: -9.563836, y: 10.532138, z: 0}
-  - {x: -10.946507, y: 0.2634914, z: 0}
-  - {x: -5.2113285, y: -9.453966, z: 0}
-  - {x: 7.07312, y: -10.13688, z: 0}
-  - {x: 17.944826, y: -2.1511488, z: 0}
+  - {x: 0, y: 3.2592103, z: 0}
+  - {x: -2.0996823, y: 1.674441, z: 0}
+  - {x: -4.3463163, y: -0.99201804, z: 0}
+  - {x: -1.1848586, y: -2.4603848, z: 0}
+  - {x: 1.4583478, y: -3.028292, z: 0}
+  - {x: 3.0268612, y: -0.6908614, z: 0}
+  - {x: 1.2115052, y: 0.96614385, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -93,7 +124,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.25
+        value: 0.08
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -102,7 +133,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.25
+        value: 0.08
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -150,33 +181,16 @@ LineRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_MaskInteraction: 0
-  m_UseWorldSpace: 1
+  m_UseWorldSpace: 0
   m_Loop: 1
-  m_ApplyActiveColorSpace: 1
---- !u!114 &769428911241895728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3231339082315047307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72d313c4c4d2e4f82a1fa50f6ac2cfa7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vertices: 8
-  initialPos: {x: 14.21, y: 3, z: 0}
-  speed: 0.25
-  threshold: 5
-  animate: 0
---- !u!60 &1660461546463251099
+  m_ApplyActiveColorSpace: 0
+--- !u!60 &9032371507964214316
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3231339082315047307}
+  m_GameObject: {fileID: 9032371507964214313}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -199,7 +213,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -214,12 +228,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 14.21, y: 3}
-      - {x: 13.153979, y: 17.396622}
-      - {x: -0.7693701, y: 16.440628}
-      - {x: -9.563836, y: 10.532138}
-      - {x: -10.946507, y: 0.2634914}
-      - {x: -5.2113285, y: -9.453966}
-      - {x: 7.07312, y: -10.13688}
-      - {x: 17.944826, y: -2.1511488}
+    - - {x: 0, y: 3.2592103}
+      - {x: -2.0996823, y: 1.674441}
+      - {x: -4.3463163, y: -0.99201804}
+      - {x: -1.1848586, y: -2.4603848}
+      - {x: 1.4583478, y: -3.028292}
+      - {x: 3.0268612, y: -0.6908614}
+      - {x: 1.2115052, y: 0.96614385}
   m_UseDelaunayMesh: 0

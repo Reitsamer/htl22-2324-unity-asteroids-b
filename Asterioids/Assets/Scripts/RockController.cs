@@ -1,81 +1,54 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-[RequireComponent(typeof(LineRenderer))]
-public class RockController : Moveable
+public class RockController : Loopable
 {
-    public Vector3 direction;
+    [SerializeField]
+    public float MoveSpeed = 10;
+    [SerializeField]
+    public float Accel = 2;
 
-    [SerializeField] private float speed;
+    private Vector3 startPos;
+    private LineRenderer lineRenderer;
 
-    // [SerializeField] private Transform rockPrefab;
-    
-    private float SpawnLeft => Left - lr.bounds.size.x * 0.5f;
-    private float SpawnRight => Right + lr.bounds.size.x * 0.5f;
-    private float SpawnTop => Top + lr.bounds.size.y * 0.5f;
-    private float SpawnBottom => Bottom - lr.bounds.size.y * 0.5f;
-
-    private float ScreenHeight => (Top - Bottom);
-    private float ScreenWidth => (Right - Left);
-
-    private LineRenderer lr;
-    private MeshCollider mc;
-
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
-        lr = GetComponent<LineRenderer>();
-        mc = GetComponent<MeshCollider>();
+        startPos = transform.position;
+        lineRenderer = GetComponent<LineRenderer>();
+
+        DoReset();
+    }
+
+    void DoReset()
+    {
+        transform.position = startPos;
+
+        var direction = Random.rotation.z;
+
+        var temp = transform.rotation;
+        temp.z = direction;
+        transform.rotation = temp;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position +=
-            new Vector3(
-                direction.normalized.x * speed * Time.deltaTime,
-                direction.normalized.y * speed * Time.deltaTime,
-                0
-            );
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            DoReset();
+        }
 
-        CorrectPosition();
-    }
+        {
+            float mult = Accel * Time.deltaTime;
+            var pos = transform.position;
+            var angle = (transform.eulerAngles.z * Mathf.PI) / 180;
+            pos.x -= Mathf.Sin(angle) * MoveSpeed * mult;
+            pos.y += Mathf.Cos(angle) * MoveSpeed * mult;
+            transform.position = pos;
+        }
 
-    private void CorrectPosition()
-    {
-        // if (direction.normalized.x < 0)
-        // {
-        //     if (lr.bounds.max.x < Left)
-        //     {
-        //         transform.position = 
-        //             new Vector3(
-        //                 Right + lr.bounds.size.x * 0.5f,
-        //                 transform.position.y,
-        //                 transform.position.z);
-        //     }
-        // }
-
-        transform.position += direction.normalized * Time.deltaTime * speed;
-        transform.position = new Vector3(
-            (transform.position.x + SpawnRight + ScreenWidth) % ScreenWidth - SpawnRight,
-            (transform.position.y + SpawnTop + ScreenHeight) % ScreenHeight - SpawnTop,
-            transform.position.z
-        );
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (!other.tag.Equals("Bullet"))
-            return;
-        
-        Destroy(other.transform.gameObject);
-
-        Instantiate(transform, transform.position, Quaternion.identity);
-        Instantiate(transform, transform.position, Quaternion.identity);
-        
-        Destroy(transform.gameObject);
+        CorrectPosition(lineRenderer);
     }
 }
