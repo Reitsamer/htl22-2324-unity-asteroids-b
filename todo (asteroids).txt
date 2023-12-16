@@ -1,6 +1,6 @@
 - UI (Splash Screen, Menü, In-Game, Joystick Steuerung Handy, Highscore, Credits)
 - Gameplay (Ship Asteroid Crash, Shot hits Asteroid, Asteroid breaks/explodes,
-     Player/Asteroids Spawn, Highscore)
+     Player/Asteroids Spawn, Highscore, Countdown)
 - FX (Particle für Asteroid breaks, Player dies, Smoke/Stars Background)
 - Deploy to device
 - Music & Sound Effects
