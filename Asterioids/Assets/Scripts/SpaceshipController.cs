@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(Rigidbody2D))]
 public class SpaceshipController : Loopable, IShouldBeStopped
 {
     [SerializeField]
@@ -19,12 +21,15 @@ public class SpaceshipController : Loopable, IShouldBeStopped
 
     bool canMove = false;
 
+    Rigidbody2D rb;
+
 
     // Start is called before the first frame update
     void Start()
     {
         Accel = 0;
         lineRenderer = GetComponent<LineRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -35,6 +40,12 @@ public class SpaceshipController : Loopable, IShouldBeStopped
     }
     void Move()
     {
+        float x = 
+            ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) ? RotSpeed : 0) - 
+            ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) ? RotSpeed : 0);
+
+        transform.Rotate(new Vector3(0, 0, -x), RotSpeed * Time.deltaTime);
+
         // shoot bullet
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -45,37 +56,15 @@ public class SpaceshipController : Loopable, IShouldBeStopped
             bullet.transform.Translate(Vector3.up * 2.5f, transform);
         }
 
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-        {
-            var pos = transform.eulerAngles;
-            pos.z += Time.deltaTime * RotSpeed;
-            transform.eulerAngles = pos;
-        }
-
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-        {
-            var pos = transform.eulerAngles;
-            pos.z -= Time.deltaTime * RotSpeed;
-            transform.eulerAngles = pos;
-        }
-
-        bool fw = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
-        bool bw = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
-
-        Accel -= Accel * (1.7f * Time.deltaTime);
-        Accel += ((fw ? 1 : 0) - (bw ? 1 : 0)) * 10f * Time.deltaTime;
-        Accel = Mathf.Clamp(Accel, -3, 5);
-
-        {
-            float mult = Accel * Time.deltaTime;
-            var pos = transform.position;
-            var angle = (transform.eulerAngles.z * Mathf.PI) / 180;
-            pos.x -= Mathf.Sin(angle) * MoveSpeed * mult;
-            pos.y += Mathf.Cos(angle) * MoveSpeed * mult;
-            transform.position = pos;
-        }
-
         CorrectPosition(lineRenderer);
+    }
+    private void FixedUpdate()
+    {
+        if (!canMove)
+            return;
+
+        float fw = (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) ? MoveSpeed : 0;
+        rb.AddForce(rb.transform.up * fw);
     }
     public void StartGame()
     {
