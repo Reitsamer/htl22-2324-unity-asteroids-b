@@ -1,100 +1,112 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(LineRenderer), typeof(PolygonCollider2D))]
 public class RockCreator : MonoBehaviour
 {
-    [SerializeField] private int vertices;
-    [SerializeField] private Vector3 initialPos;
-    [SerializeField] private float speed;
-    [SerializeField] private float threshold;
-    [SerializeField] private bool animate;
+    [SerializeField]
+    private int vertices = 1;
+    [SerializeField]
+    private float threshold = 4;
+    [SerializeField]
+    private float speed = 1;
+    [SerializeField]
+    private float startSize = 4;
 
-    private float randomStartDeformation;
-    
-    private LineRenderer lr;
-    // private MeshCollider mc;
-    private PolygonCollider2D pc;
-    
-    // Start is called before the first frame update
+    [SerializeField]
+    private GameObject RockPrefab;
+
+    private float randomStartDeformation = 1;
+    private LineRenderer lineRenderer;
+    private PolygonCollider2D polygonCollider2D;
+    private Vector3[] rockPoints;
+
+    private bool isClone = false;
+
     void Start()
     {
-        lr = GetComponent<LineRenderer>();
-        // mc = GetComponent<MeshCollider>();
-        pc = GetComponent<PolygonCollider2D>();
-        
-        randomStartDeformation = Random.Range(0f, 10f);
+        RegenerateRock();
+    }
+
+    void OnValidate()
+    {
+        RegenerateRock();
+    }
+
+    void Update()
+    {
+        RegenerateRock();
+    }
+
+    public void RegenerateRock()
+    {
+        if (vertices < 1)
+            vertices = 1;
+
+        if (polygonCollider2D == null)
+            polygonCollider2D = GetComponent<PolygonCollider2D>();
+
+        if (lineRenderer == null)
+            lineRenderer = GetComponent<LineRenderer>();
+
         GenerateGeometry();
         GenerateCollider();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (animate)
-        {
-            GenerateGeometry();
-            GenerateCollider();
-        }
-    }
-
     private void GenerateGeometry()
     {
-        lr.positionCount=vertices;
-        lr.startWidth=0.25f;
-        lr.endWidth=0.25f;
-        
-        //Quaternion rotate=Quaternion.Euler(0,0,360/Vertices);
-        Vector3[] positions=new Vector3[vertices];
-        
-        positions[0]=initialPos;
-        for(int i=1;i<vertices;i++)
+        Vector3 initialPos = new Vector3(0, startSize, 0);
+
+        lineRenderer.positionCount = vertices;
+        lineRenderer.startWidth = 0.08f;
+        lineRenderer.endWidth = 0.08f;
+
+        rockPoints = new Vector3[vertices];
+
+        for (int i = 0; i < vertices; i++)
         {
-            positions[i]=Quaternion.Euler(0,0,360*i/(float)vertices)*initialPos;
-            
-            float deformation = randomStartDeformation + Time.time * speed;
+            float angle = (360 * i) / (float)vertices;
+            float angleDeg = (angle * Mathf.PI) / 180;
+            rockPoints[i] = Quaternion.Euler(0, 0, angle) * initialPos;
+            float deformation = randomStartDeformation + Time.time * speed + (i * 100);
             float offset = Mathf.PerlinNoise(
-                positions[i].x + deformation, 
-                positions[i].y + deformation ) * threshold;
-            float remappedOffset = math.remap(0f, 1f, -1f, 1f, offset);
-            positions[i].x += remappedOffset;
-            positions[i].y += remappedOffset;
+                rockPoints[i].x + deformation,
+                rockPoints[i].y + deformation) * threshold;
+            float remapStrenght = offset - (threshold / 2);
+            rockPoints[i].x -= Mathf.Sin(angleDeg) * remapStrenght; //remappedOffset;
+            rockPoints[i].y += Mathf.Cos(angleDeg) * remapStrenght; //remappedOffset;
         }
-        lr.SetPositions(positions);
-        lr.loop=true;
+        lineRenderer.SetPositions(rockPoints);
+        lineRenderer.loop = true;
     }
 
-    // private void GenerateCollider()
-    // {
-    //     Mesh mesh = new Mesh();
-    //     lr.BakeMesh(mesh);
-    //     mc.sharedMesh = mesh;
-    // }
-
-    private void GenerateCollider()
+    public void GenerateCollider()
     {
-        Vector3[] positions = new Vector3[lr.positionCount];
-        lr.GetPositions(positions);
-
-        Vector2[] positions2d = new Vector2[positions.Length];
-        for (int i = 0; i < positions.Length; i++)
-            positions2d[i] = positions[i];
-        
-        pc.SetPath(0, positions2d);
+        polygonCollider2D.SetPath(0,
+            rockPoints.Select(p => (Vector2)p)
+            .ToArray());
     }
-    
-    // private void OnValidate()
-    // {
-    //     lr = GetComponent<LineRenderer>();
-    //     // mc = GetComponent<MeshCollider>();
-    //     pc = GetComponent<PolygonCollider2D>();
-    //
-    //
-    //     GenerateGeometry();
-    //     GenerateCollider();
-    // }
+
+    public void HandleShoot()
+    {
+        if (!isClone)
+            for (int i = 0; i < 2; i++)
+            {
+                var rock = Instantiate(RockPrefab);
+                var rockCreator = rock.GetComponent<RockCreator>();
+                rockCreator.randomStartDeformation = randomStartDeformation + new System.Random().Next(1000);
+
+                rockCreator.startSize /= 2;
+                rockCreator.threshold /= 1.5f;
+                rockCreator.isClone = true;
+
+                var rockController = rock.GetComponent<RockController>();
+                rockController.MoveSpeed *= 1.8f;
+            }
+
+        Destroy(gameObject);
+    }
 }
