@@ -15,7 +15,7 @@ public class RockController : Loopable, IShouldBeStopped
     private Vector3 startPos;
     private LineRenderer lineRenderer;
 
-    bool canMove = false;
+    internal bool canMove = false;
 
     // Start is called before the first frame update
     void Start()
