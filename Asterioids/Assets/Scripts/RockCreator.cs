@@ -1,8 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
+
+
+public class RockSizeArgs : EventArgs
+{
+    public float size;
+
+    public RockSizeArgs(float size)
+    {
+        this.size = size;
+    }
+}
+
 
 [RequireComponent(typeof(LineRenderer), typeof(PolygonCollider2D))]
 public class RockCreator : MonoBehaviour
@@ -25,6 +39,8 @@ public class RockCreator : MonoBehaviour
     private Vector3[] rockPoints;
 
     private bool isClone = false;
+
+    public EventHandler<RockSizeArgs> SendMessageToPlayer;
 
     void Start()
     {
@@ -92,6 +108,7 @@ public class RockCreator : MonoBehaviour
 
     public void HandleShoot()
     {
+
         if (!isClone)
             for (int i = 0; i < 2; i++)
             {
@@ -106,8 +123,14 @@ public class RockCreator : MonoBehaviour
                 var rockController = rock.GetComponent<RockController>();
                 rockController.canMove = true;
                 rockController.MoveSpeed *= 1.8f;
+                
             }
 
         Destroy(gameObject);
+    }
+
+    public float GetSize()
+    {
+        return startSize;
     }
 }

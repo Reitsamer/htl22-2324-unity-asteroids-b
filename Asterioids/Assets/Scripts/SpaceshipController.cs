@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class SpaceshipController : Loopable, IShouldBeStopped
@@ -23,7 +24,7 @@ public class SpaceshipController : Loopable, IShouldBeStopped
 
     Rigidbody2D rb;
 
-
+    public UnityEvent AddToScore;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +59,9 @@ public class SpaceshipController : Loopable, IShouldBeStopped
 
         CorrectPosition(lineRenderer);
     }
+
+   
+   
     private void FixedUpdate()
     {
         if (!canMove)

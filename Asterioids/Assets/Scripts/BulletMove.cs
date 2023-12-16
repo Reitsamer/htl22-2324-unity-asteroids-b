@@ -13,7 +13,7 @@ public class BulletMove : Loopable
     private SpriteRenderer spriteRenderer;
     private bool loopedOnce;
 
-    public UnityEvent AddToScore;
+
 
     // Start is called before the first frame update
     void Start()
@@ -51,9 +51,13 @@ public class BulletMove : Loopable
         var rock = other.GetComponent<RockCreator>();
         if (rock != null)
         {
-            AddToScore?.Invoke();
+            AddScore(rock.GetSize());
             Destroy(gameObject);
             rock.HandleShoot();
         }
+    }
+    void AddScore(float size)
+    {
+        Highscore.Instance.IncreaseScore(size);
     }
 }

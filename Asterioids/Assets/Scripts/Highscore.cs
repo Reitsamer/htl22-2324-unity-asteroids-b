@@ -1,37 +1,63 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Highscore : MonoBehaviour
 {
-    //public void IncreaseWealth(float startCoins, float lerpDuration, Currency currency)
-    //{
+    [SerializeField] float currentMoney;
 
-    //    StartCoroutine(MoneyCoroutine(startCoins, lerpDuration, currency));
+    public static Highscore Instance;
 
-    //    GetComponent<ParticleSystem>().Play();
-    //    GetComponent<AudioSource>().Play();
-    //    GetComponent<Collider>().enabled = false;
-    //    gameObject.GetComponent<Renderer>().enabled = false;
-    //}
+    
 
-    //IEnumerator MoneyCoroutine(float startCoins, float lerpDuration, Currency currency)
-    //{
-    //    float addMoney = 0;
-    //    float moneyBefore = startCoins;
-    //    float timeElapsed = 0;
-    //    while (startCoins <= moneyAmount)
-    //    {
-    //        moneyBefore = startCoins;
-    //        startCoins = Mathf.Lerp(startCoins, moneyAmount, timeElapsed / lerpDuration);
+    [SerializeField] float amountToAdd;
 
-    //        addMoney = Math.Abs(startCoins - moneyBefore);
+    float startCoins = 0;
 
-    //        currency.SetMoney(addMoney);
 
-    //        timeElapsed += Time.deltaTime;
-    //        yield return null;
+    float lerpDuration = 0.75f;
 
-    //    }
-    //}
+    TextMeshProUGUI scoreUI;
+    private void Start()
+    {
+        Instance = this;
+        scoreUI = GetComponent<TextMeshProUGUI>();
+    }
+    public void IncreaseScore(float size)
+    {
+        Debug.Log(size);
+        StartCoroutine(ScoreCoroutine(startCoins, lerpDuration, size));
+
+        //GetComponent<ParticleSystem>().Play();
+        //GetComponent<AudioSource>().Play();
+        //GetComponent<Collider>().enabled = false;
+        //gameObject.GetComponent<Renderer>().enabled = false;
+    }
+
+    IEnumerator ScoreCoroutine(float startCoins, float lerpDuration, float size)
+    {
+        float addScore = 0;
+        float moneyBefore = startCoins;
+        float timeElapsed = 0;
+        while (startCoins <= amountToAdd)
+        {
+            moneyBefore = startCoins;
+            startCoins = Mathf.Lerp(startCoins, amountToAdd, timeElapsed / lerpDuration);
+
+            addScore = Math.Abs(startCoins - moneyBefore);
+
+            SetScore(addScore / size);
+
+            timeElapsed += Time.deltaTime;
+            yield return null;
+
+        }
+    }
+    void SetScore(float score)
+    {
+        currentMoney += score;
+        scoreUI.text = $"Score: {Math.Round(currentMoney, 0)}";
+    }
 }
