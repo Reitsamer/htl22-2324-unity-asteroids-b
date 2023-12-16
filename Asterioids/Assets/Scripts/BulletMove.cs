@@ -12,6 +12,8 @@ public class BulletMove : Loopable
     private SpriteRenderer spriteRenderer;
     private bool loopedOnce;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,14 +28,13 @@ public class BulletMove : Loopable
     // Update is called once per frame
     void Update()
     {
-        {
-            float mult = Accel * Time.deltaTime;
-            var pos = transform.position;
-            var angle = (transform.eulerAngles.z * Mathf.PI) / 180;
-            pos.x -= Mathf.Sin(angle) * MoveSpeed * mult;
-            pos.y += Mathf.Cos(angle) * MoveSpeed * mult;
-            transform.position = pos;
-        }
+        float mult = Accel * Time.deltaTime;
+        var pos = transform.position;
+        var angle = (transform.eulerAngles.z * Mathf.PI) / 180;
+
+        pos.x -= Mathf.Sin(angle) * MoveSpeed * mult;
+        pos.y += Mathf.Cos(angle) * MoveSpeed * mult;
+        transform.position = pos;
 
         if (CorrectPosition(spriteRenderer))
         {
