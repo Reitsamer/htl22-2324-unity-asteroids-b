@@ -62,7 +62,7 @@ public class SpaceshipController : Loopable, IStartStop
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation;
 
-            bullet.transform.Translate(Vector3.up * 2.5f, transform);
+            bullet.transform.Translate(Vector3.up * 2.8f, transform);
         }
 
         CorrectPosition(lineRenderer);
