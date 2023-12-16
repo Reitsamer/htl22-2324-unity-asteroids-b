@@ -13,6 +13,7 @@ public class BulletMove : Loopable
     private SpriteRenderer spriteRenderer;
     private bool loopedOnce;
 
+    public GameController controller;
 
 
     // Start is called before the first frame update
@@ -29,6 +30,11 @@ public class BulletMove : Loopable
     // Update is called once per frame
     void Update()
     {
+        if (!controller.canMove)
+        {
+            return;
+        }
+
         float mult = Accel * Time.deltaTime;
         var pos = transform.position;
         var angle = (transform.eulerAngles.z * Mathf.PI) / 180;

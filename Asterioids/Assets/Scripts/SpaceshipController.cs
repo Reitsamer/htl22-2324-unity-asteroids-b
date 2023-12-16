@@ -22,8 +22,6 @@ public class SpaceshipController : Loopable, IStartStop
 
     private LineRenderer lineRenderer;
 
-    bool canMove = false;
-
     Rigidbody2D rb;
 
     public UnityEvent AddToScore;
@@ -33,12 +31,19 @@ public class SpaceshipController : Loopable, IStartStop
         Accel = 0;
         lineRenderer = GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        ResetPosition();
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = Vector3.zero;
+        lineRenderer.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (canMove)
+        if (gameController.canMove)
             Move();
     }
     void Move()
@@ -62,6 +67,9 @@ public class SpaceshipController : Loopable, IStartStop
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation;
 
+            BulletMove move = bullet.GetComponent<BulletMove>();
+            move.controller = gameController;
+
             bullet.transform.Translate(Vector3.up * 2.8f, transform);
         }
 
@@ -72,17 +80,22 @@ public class SpaceshipController : Loopable, IStartStop
    
     private void FixedUpdate()
     {
-        if (!canMove)
-            return;
+        if (!gameController.canMove)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = 0;
+        }
 
         float forward = (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) ? MoveSpeed : 0;
         rb.AddForce(rb.transform.up * forward);
     }
     public void StartGame()
     {
-        canMove = true;
+        ResetPosition();
         rb.velocity = Vector3.zero;
         rb.angularVelocity = 0;
+        lineRenderer.enabled = true;
+
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -91,7 +104,6 @@ public class SpaceshipController : Loopable, IStartStop
 
     public void StopGame()
     {
-        canMove = false;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = 0;
     }

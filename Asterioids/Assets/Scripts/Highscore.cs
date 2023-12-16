@@ -27,7 +27,6 @@ public class Highscore : MonoBehaviour
     }
     public void IncreaseScore(float size)
     {
-        Debug.Log(size);
         StartCoroutine(ScoreCoroutine(startCoins, lerpDuration, size));
 
         //GetComponent<ParticleSystem>().Play();
@@ -48,16 +47,21 @@ public class Highscore : MonoBehaviour
 
             addScore = Math.Abs(startCoins - moneyBefore);
 
-            SetScore(addScore / size);
+            IncScore(addScore / size);
 
             timeElapsed += Time.deltaTime;
             yield return null;
 
         }
     }
-    void SetScore(float score)
+    public void IncScore(float score)
     {
         currentMoney += score;
+        scoreUI.text = $"Score: {Math.Round(currentMoney, 0)}";
+    }
+    public void ResetScore()
+    {
+        currentMoney = 0;
         scoreUI.text = $"Score: {Math.Round(currentMoney, 0)}";
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class RockController : Loopable, IStartStop
+public class RockController : Loopable
 {
 
 
@@ -15,7 +15,7 @@ public class RockController : Loopable, IStartStop
     private Vector3 startPos;
     private LineRenderer lineRenderer;
 
-    public bool canMove = false;
+    public GameController controller;
 
     // Start is called before the first frame update
     void Start()
@@ -36,14 +36,11 @@ public class RockController : Loopable, IStartStop
         temp.z = direction;
         transform.rotation = temp;
     }
-    public void StartGame()
-    {
-        canMove = true;
-    }
+ 
     void UpdateAsteroid()
     {
 
-        if (canMove)
+        if (controller.canMove)
         {
             float mult = Accel * Time.deltaTime;
             var pos = transform.position;
@@ -64,10 +61,5 @@ public class RockController : Loopable, IStartStop
         UpdateAsteroid();
 
         CorrectPosition(lineRenderer);
-    }
-
-    public void StopGame()
-    {
-        canMove = false;
     }
 }

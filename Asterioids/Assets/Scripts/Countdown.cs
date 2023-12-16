@@ -9,6 +9,7 @@ public class Countdown : MonoBehaviour
 {
     public static EventHandler OnAllowMovement;
 
+    bool countdownStarted = false;
     int countdownTimer = 3;
     [SerializeField] TextMeshProUGUI counterNum;
 
@@ -21,6 +22,10 @@ public class Countdown : MonoBehaviour
 
     public void StartCountdown()
     {
+        if (countdownStarted)
+            return;
+        countdownStarted = true;
+
         countdownTimer = 3;
         counterNum.gameObject.SetActive(true);
         StartCoroutine(Counter());
@@ -55,10 +60,11 @@ public class Countdown : MonoBehaviour
         {
             counterNum.text = $"{countdownTimer}";
             countdownTimer--;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
         }
         StartAll();
 
         counterNum.gameObject.SetActive(false);
+        countdownStarted = false;
     }
 }

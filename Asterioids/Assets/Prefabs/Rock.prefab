@@ -52,6 +52,9 @@ MonoBehaviour:
   speed: 0.3
   startSize: 3
   RockPrefab: {fileID: 9032371507964214313}
+  randomStartDeformation: 1
+  spawner: {fileID: 0}
+  isClone: 0
 --- !u!114 &9032371507964214317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 5
   Accel: 2
-  canMove: 0
+  controller: {fileID: 0}
 --- !u!120 &9032371507964214314
 LineRenderer:
   serializedVersion: 2
@@ -110,13 +113,13 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 1.8971616, z: 0}
-  - {x: -1.7096362, y: 1.3633896, z: 0}
-  - {x: -2.7040648, y: -0.61718476, z: 0}
-  - {x: -1.2437738, y: -2.5827236, z: 0}
-  - {x: 1.2360598, y: -2.5667062, z: 0}
-  - {x: 4.0184507, y: -0.91718525, z: 0}
-  - {x: 2.3014004, y: 1.8353066, z: 0}
+  - {x: 0, y: 2.6008914, z: 0}
+  - {x: -2.4473784, y: 1.9517194, z: 0}
+  - {x: -2.2266264, y: -0.50821257, z: 0}
+  - {x: -1.2420393, y: -2.5791218, z: 0}
+  - {x: 1.8248768, y: -3.7893972, z: 0}
+  - {x: 3.598101, y: -0.82124317, z: 0}
+  - {x: 2.1035786, y: 1.677549, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -229,11 +232,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1.8971616}
-      - {x: -1.7096362, y: 1.3633896}
-      - {x: -2.7040648, y: -0.61718476}
-      - {x: -1.2437738, y: -2.5827236}
-      - {x: 1.2360598, y: -2.5667062}
-      - {x: 4.0184507, y: -0.91718525}
-      - {x: 2.3014004, y: 1.8353066}
+    - - {x: 0, y: 2.6008914}
+      - {x: -2.4473784, y: 1.9517194}
+      - {x: -2.2266264, y: -0.50821257}
+      - {x: -1.2420393, y: -2.5791218}
+      - {x: 1.8248768, y: -3.7893972}
+      - {x: 3.598101, y: -0.82124317}
+      - {x: 2.1035786, y: 1.677549}
   m_UseDelaunayMesh: 0
