@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class SpaceshipController : Loopable, IShouldBeStopped
+public class SpaceshipController : Loopable, IStartStop
 {
     [SerializeField]
     public float RotSpeed = 300;
@@ -13,6 +13,8 @@ public class SpaceshipController : Loopable, IShouldBeStopped
 
     [SerializeField]
     public GameObject bulletPrefab;
+    [SerializeField]
+    private GameController gameController;
 
     public float Accel = 0;
     private Vector3 AccelVec = Vector3.zero;
@@ -40,11 +42,17 @@ public class SpaceshipController : Loopable, IShouldBeStopped
     }
     void Move()
     {
-        float x = 
-            ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) ? RotSpeed : 0) - 
-            ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) ? RotSpeed : 0);
+        float horizontal = 
+            ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) ? 1 : 0) - 
+            ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) ? 1 : 0);
 
-        transform.Rotate(new Vector3(0, 0, -x), RotSpeed * Time.deltaTime);
+        //Accel += horizontal / 4;
+        //Accel -= Accel * (2f * Time.deltaTime);
+        //Accel = Mathf.Clamp(Accel, -1, 1);
+        //if (Mathf.Abs(Accel) < 0.1)
+        //    Accel = 0;
+
+        transform.Rotate(new Vector3(0, 0, -1), RotSpeed * Time.deltaTime * horizontal);
 
         // shoot bullet
         if (Input.GetKeyDown(KeyCode.Space))
@@ -63,11 +71,24 @@ public class SpaceshipController : Loopable, IShouldBeStopped
         if (!canMove)
             return;
 
-        float fw = (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) ? MoveSpeed : 0;
-        rb.AddForce(rb.transform.up * fw);
+        float forward = (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) ? MoveSpeed : 0;
+        rb.AddForce(rb.transform.up * forward);
     }
     public void StartGame()
     {
         canMove = true;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = 0;
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        gameController.Crash();
+    }
+
+    public void StopGame()
+    {
+        canMove = false;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = 0;
     }
 }

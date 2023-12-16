@@ -10,20 +10,38 @@ public class Countdown : MonoBehaviour
     public static EventHandler OnAllowMovement;
 
     int countdownTimer = 3;
-    [SerializeField] GameObject[] objectsToStop;
     [SerializeField] TextMeshProUGUI counterNum;
 
     private void Start()
     {
-        objectsToStop = FindObjectsOfType<GameObject>();
+        
         counterNum = GetComponentInChildren<TextMeshProUGUI>();
-        StartCountdown();
+        //StartCountdown();
     }
 
-    void StartCountdown()
+    public void StartCountdown()
     {
+        countdownTimer = 3;
+        counterNum.gameObject.SetActive(true);
         StartCoroutine(Counter());
     }
+
+    public void StopAll()
+    {
+        GameObject[] objectsToStop = FindObjectsOfType<GameObject>();
+        foreach (var obj in objectsToStop)
+            if (obj.TryGetComponent(out IStartStop o))
+                o.StopGame();
+    }
+
+    public void StartAll()
+    {
+        GameObject[] objectsToStop = FindObjectsOfType<GameObject>();
+        foreach (var obj in objectsToStop)
+            if (obj.TryGetComponent(out IStartStop o))
+                o.StartGame();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -39,13 +57,8 @@ public class Countdown : MonoBehaviour
             countdownTimer--;
             yield return new WaitForSeconds(1);
         }
-        foreach (var obj in objectsToStop)
-        {
-            if (obj.TryGetComponent(out IShouldBeStopped o))
-            {
-                o.StartGame();
-            }
-        }
-        Destroy(gameObject);
+        StartAll();
+
+        counterNum.gameObject.SetActive(false);
     }
 }
