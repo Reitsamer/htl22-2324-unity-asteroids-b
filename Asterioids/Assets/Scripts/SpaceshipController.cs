@@ -13,6 +13,7 @@ public class SpaceshipController : Loopable
     public GameObject bulletPrefab;
 
     public float Accel = 0;
+    private Vector3 AccelVec = Vector3.zero;
 
     private LineRenderer lineRenderer;
 
