@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9032371507964214314}
   - component: {fileID: 9032371507964214316}
   m_Layer: 0
-  m_Name: Rock
+  m_Name: Rockbutfast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7f9004db63214408dec9c2f7ad44f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 5
+  MoveSpeed: 10
   Accel: 2
 --- !u!120 &9032371507964214314
 LineRenderer:
@@ -109,13 +109,13 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 3.9753518, z: 0}
-  - {x: -2.4616625, y: 1.9631106, z: 0}
-  - {x: -2.732595, y: -0.62369657, z: 0}
-  - {x: -1.2580156, y: -2.612297, z: 0}
-  - {x: 1.1986063, y: -2.4889333, z: 0}
-  - {x: 1.9533919, y: -0.44584894, z: 0}
-  - {x: 1.8484126, y: 1.4740608, z: 0}
+  - {x: 0, y: 2.8607025, z: 0}
+  - {x: -2.6430125, y: 2.1077323, z: 0}
+  - {x: -3.1584415, y: -0.72089326, z: 0}
+  - {x: -0.9867683, y: -2.049046, z: 0}
+  - {x: 1.5815976, y: -3.2842228, z: 0}
+  - {x: 2.5502458, y: -0.58207697, z: 0}
+  - {x: 2.3118129, y: 1.8436104, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -228,11 +228,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 3.9753518}
-      - {x: -2.4616625, y: 1.9631106}
-      - {x: -2.732595, y: -0.62369657}
-      - {x: -1.2580156, y: -2.612297}
-      - {x: 1.1986063, y: -2.4889333}
-      - {x: 1.9533919, y: -0.44584894}
-      - {x: 1.8484126, y: 1.4740608}
+    - - {x: 0, y: 2.8607025}
+      - {x: -2.6430125, y: 2.1077323}
+      - {x: -3.1584415, y: -0.72089326}
+      - {x: -0.9867683, y: -2.049046}
+      - {x: 1.5815976, y: -3.2842228}
+      - {x: 2.5502458, y: -0.58207697}
+      - {x: 2.3118129, y: 1.8436104}
   m_UseDelaunayMesh: 0

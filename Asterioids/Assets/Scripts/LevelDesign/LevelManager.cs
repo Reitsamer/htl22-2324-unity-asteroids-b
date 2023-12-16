@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.SearchService;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -10,35 +9,18 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private UnityEngine.SceneManagement.Scene active;
-    [SerializeField] private List<UnityEngine.SceneManagement.Scene> scene;
-    
-   
-
-    private int index = 0;
 
     private void Start()
     {
-        scene = SceneManager.GetAllScenes().ToList();
-        active = scene[index];
-        SceneManager.SetActiveScene(active);
+        active = SceneManager.GetActiveScene();
     }
 
-    
+    private void Load(Scene scene) => SceneManager.LoadScene(scene.name);
 
-    private void Load()
-    {
-        active = scene[index++];
-        SceneManager.SetActiveScene(active);
-    }
-
-    private void Unload ()
-    {
-        SceneManager.UnloadSceneAsync(active);
-    }
+    private void Unload(Scene scene) => SceneManager.UnloadSceneAsync(scene);
 
     private void OnLevelWasLoaded(int level)
     {
-        // IRGENDEINE MESSAGE FÜR DEN START DES NEUEN LVLSs
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
     }
 }
-
