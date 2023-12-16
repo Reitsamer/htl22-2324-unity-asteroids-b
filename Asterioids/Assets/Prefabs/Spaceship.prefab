@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3457735810862228833
+--- !u!1 &1706430572266571277
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3025589419277006028}
-  - component: {fileID: 2440386158123117360}
-  - component: {fileID: 3811647653939112668}
+  - component: {fileID: 1706430572266571279}
+  - component: {fileID: 1706430572266571273}
+  - component: {fileID: 1706430572266571276}
+  - component: {fileID: 1706430572266571278}
   m_Layer: 0
   m_Name: Spaceship
   m_TagString: Untagged
@@ -18,13 +19,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3025589419277006028
+--- !u!4 &1706430572266571279
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3457735810862228833}
+  m_GameObject: {fileID: 1706430572266571277}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -33,14 +34,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!120 &2440386158123117360
+--- !u!114 &1706430572266571273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706430572266571277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde5059ea80843644b60ba0b5b90c3a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotSpeed: 400
+  MoveSpeed: 12
+  bulletPrefab: {fileID: 7749017391893647860, guid: 6bb57cfa70eceb84d8c0c62fb8bda615, type: 3}
+  Accel: 0
+--- !u!120 &1706430572266571276
 LineRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3457735810862228833}
+  m_GameObject: {fileID: 1706430572266571277}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -76,9 +93,11 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 2, z: 0}
-  - {x: -1.5, y: -2, z: 0}
-  - {x: 1.5, y: -2, z: 0}
+  - {x: 0, y: 2.4, z: 0}
+  - {x: 1.3, y: -1, z: 0}
+  - {x: 0.3, y: -0.4, z: 0}
+  - {x: -0.3, y: -0.4, z: 0}
+  - {x: -1.3, y: -1, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -86,8 +105,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.17318405
+        time: 0.17701851
+        value: 0.085112154
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -123,7 +142,7 @@ LineRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 0
+      m_Mode: 1
       m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
@@ -137,18 +156,54 @@ LineRenderer:
   m_MaskInteraction: 0
   m_UseWorldSpace: 0
   m_Loop: 1
-  m_ApplyActiveColorSpace: 1
---- !u!114 &3811647653939112668
-MonoBehaviour:
+  m_ApplyActiveColorSpace: 0
+--- !u!60 &1706430572266571278
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3457735810862228833}
+  m_GameObject: {fileID: 1706430572266571277}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db54ea838be6b44328f0173e92879444, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 360
-  bullet: {fileID: 3526473784261316656, guid: 8b650303dfc8c43d1967ba7b8f8bf96a, type: 3}
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 2.4505813}
+      - {x: -1.3255646, y: -1.0399046}
+      - {x: -0.3534419, y: -0.40970296}
+      - {x: 0.3025116, y: -0.42617577}
+      - {x: 1.2926189, y: -1.0399042}
+  m_UseDelaunayMesh: 0
