@@ -23,6 +23,7 @@ public class RockSpawner : MonoBehaviour, IStartStop
 
     public void SpawnRocks()
     {
+        // TODO: random pos along border
         int count = controller.TotalRockCount;
 
         for (int i = 0; i < count; i++)

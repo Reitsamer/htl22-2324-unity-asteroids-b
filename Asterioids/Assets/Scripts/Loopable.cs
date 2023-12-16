@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Loopable : MonoBehaviour
 {
-    private float Left
+    public static float Left
     => Camera.main.ViewportToWorldPoint(Vector3.zero).x;
-    private float Right
+    public static float Right
         => Camera.main.ViewportToWorldPoint(Vector3.right).x;
-    private float Top
+    public static float Top
         => Camera.main.ViewportToWorldPoint(Vector3.up).y;
-    private float Bottom
+    public static float Bottom
         => Camera.main.ViewportToWorldPoint(Vector3.zero).y;
 
     protected bool CorrectPosition(Renderer renderer)
