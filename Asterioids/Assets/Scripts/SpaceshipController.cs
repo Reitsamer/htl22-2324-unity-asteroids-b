@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceshipController : Loopable
+public class SpaceshipController : Loopable, IShouldBeStopped
 {
     [SerializeField]
     public float RotSpeed = 300;
@@ -17,6 +17,9 @@ public class SpaceshipController : Loopable
 
     private LineRenderer lineRenderer;
 
+    bool canMove = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,11 @@ public class SpaceshipController : Loopable
 
     // Update is called once per frame
     void Update()
+    {
+        if (canMove)
+            Move();
+    }
+    void Move()
     {
         // shoot bullet
         if (Input.GetKeyDown(KeyCode.Space))
@@ -68,5 +76,10 @@ public class SpaceshipController : Loopable
         }
 
         CorrectPosition(lineRenderer);
+    }
+    public void StartGame()
+    {
+        Debug.Log("can move");
+        canMove = true;
     }
 }
