@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class RockController : Loopable, IShouldBeStopped
+public class RockController : Loopable, IStartStop
 {
 
 
@@ -15,7 +15,7 @@ public class RockController : Loopable, IShouldBeStopped
     private Vector3 startPos;
     private LineRenderer lineRenderer;
 
-    internal bool canMove = false;
+    public bool canMove = false;
 
     // Start is called before the first frame update
     void Start()
@@ -57,12 +57,17 @@ public class RockController : Loopable, IShouldBeStopped
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            DoReset();
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    DoReset();
+        //}
         UpdateAsteroid();
 
         CorrectPosition(lineRenderer);
+    }
+
+    public void StopGame()
+    {
+        canMove = false;
     }
 }
