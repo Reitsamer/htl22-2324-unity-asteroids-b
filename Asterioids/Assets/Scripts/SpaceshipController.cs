@@ -68,7 +68,6 @@ public class SpaceshipController : Loopable, IShouldBeStopped
     }
     public void StartGame()
     {
-        Debug.Log("can move");
         canMove = true;
     }
 }

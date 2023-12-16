@@ -104,6 +104,7 @@ public class RockCreator : MonoBehaviour
                 rockCreator.isClone = true;
 
                 var rockController = rock.GetComponent<RockController>();
+                rockController.canMove = true;
                 rockController.MoveSpeed *= 1.8f;
             }
 
