@@ -1,0 +1,13 @@
+- UI (Splash Screen, Menü, In-Game, Joystick Steuerung Handy, Highscore, Credits)
+- Gameplay (Ship Asteroid Crash, Shot hits Asteroid, Asteroid breaks/explodes,
+     Player/Asteroids Spawn, Highscore)
+- FX (Particle für Asteroid breaks, Player dies, Smoke/Stars Background)
+- Deploy to device
+- Music & Sound Effects
+- Level Loading (Asynchron, Additional)
+- Level Design (Unterschiedliche Farben/Geschwindigkeiten/Größen der Asteroids, Coins?)
+
+- Parkour-Modus? (Cinemachine)
+
+---
+Arbeiten in git-Branches (+Merge)
