@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -12,8 +13,8 @@ public class SpaceshipController : Loopable, IStartStop
     [SerializeField]
     public float MoveSpeed = 10;
 
-/*
-// <<<<<<< HEAD
+
+    // <<<<<<< HEAD
     [SerializeField]
     public GameObject bulletPrefab;
     [SerializeField]
@@ -27,14 +28,13 @@ public class SpaceshipController : Loopable, IStartStop
     Rigidbody2D rb;
 
     public UnityEvent AddToScore;
-// =======
-    [SerializeField] private Transform bullet;
 
-    public VariableJoystick variableJoystick;
+    [SerializeField] 
+    private Transform bullet;
 
+    public VariableJoystick RotateJoystick, MoveJoystick;
+    public Button shootButton;
 
-// >>>>>>> UI-InGameControls
-*/
     // Start is called before the first frame update
     void Start()
     {
@@ -53,15 +53,14 @@ public class SpaceshipController : Loopable, IStartStop
     // Update is called once per frame
     void Update()
     {
-/*
-// <<<<<<< HEAD
         if (gameController.canMove)
             Move();
     }
+
     void Move()
     {
-        float horizontal = 
-            ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) ? 1 : 0) - 
+        float horizontal =
+            ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) ? 1 : 0) -
             ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) ? 1 : 0);
 
         //Accel += horizontal / 4;
@@ -70,32 +69,37 @@ public class SpaceshipController : Loopable, IStartStop
         //if (Mathf.Abs(Accel) < 0.1)
         //    Accel = 0;
 
+        //transform.Rotate(new Vector3(0, 0, 1), speed * Time.deltaTime * -variableJoystick.Direction.x);
+
+        if (RotateJoystick.Direction.x != 0)
+            horizontal = RotateJoystick.Direction.x;
+
         transform.Rotate(new Vector3(0, 0, -1), RotSpeed * Time.deltaTime * horizontal);
 
         // shoot bullet
-// =======
-        Debug.Log(variableJoystick.Direction);
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            // LineRenderer lr = GetComponent<LineRenderer>();
-            // Transform transform = GetComponent<Transform>();
-            transform.Rotate(new Vector3(0, 0, 1), speed * Time.deltaTime);
-           
-        }
-        
-        if (Input.GetKey(KeyCode.RightArrow))
-            transform.Rotate(Vector3.forward, -speed * Time.deltaTime);
-
-        transform.Rotate(new Vector3(0, 0, 1), speed * Time.deltaTime* -variableJoystick.Direction.x);
-
-        // if (true)//variableJoystick.y!=0)
+        //// =======
+        //Debug.Log(variableJoystick.Direction);
+        //if (Input.GetKey(KeyCode.LeftArrow))
         //{
-        //transform.Rotate(variableJoystick.Direction, speed * Time.deltaTime);
+        //    // LineRenderer lr = GetComponent<LineRenderer>();
+        //    // Transform transform = GetComponent<Transform>();
+        //    transform.Rotate(new Vector3(0, 0, 1), speed * Time.deltaTime);
+
         //}
 
+        //if (Input.GetKey(KeyCode.RightArrow))
+        //    transform.Rotate(Vector3.forward, -speed * Time.deltaTime);
 
-// >>>>>>> UI-InGameControls
-*/
+        //transform.Rotate(new Vector3(0, 0, 1), speed * Time.deltaTime * -variableJoystick.Direction.x);
+
+        //// if (true)//variableJoystick.y!=0)
+        ////{
+        ////transform.Rotate(variableJoystick.Direction, speed * Time.deltaTime);
+        ////}
+
+
+        // >>>>>>> UI-InGameControls
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             var bullet = Instantiate(bulletPrefab);
@@ -111,8 +115,8 @@ public class SpaceshipController : Loopable, IStartStop
         CorrectPosition(lineRenderer);
     }
 
-   
-   
+
+
     private void FixedUpdate()
     {
         if (!gameController.canMove)
