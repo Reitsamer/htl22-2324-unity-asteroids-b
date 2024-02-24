@@ -2046,6 +2046,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1706430572266571273, guid: d3f1ca1b13772084196efb78eb40a8c3, type: 3}
+      propertyPath: MoveSpeed
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706430572266571273, guid: d3f1ca1b13772084196efb78eb40a8c3, type: 3}
       propertyPath: shootButton
       value: 
       objectReference: {fileID: 1003357954}
