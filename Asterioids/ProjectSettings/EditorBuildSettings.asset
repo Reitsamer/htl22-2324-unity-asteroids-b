@@ -5,7 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
+    path: Assets/Joystick Pack/Examples/Example Scene.unity
+    guid: 414bddd31c5ea4f4c9f5d1452e5bbb41
+  - enabled: 1
+    path: Assets/Scenes/Probe mit schub shoot laut.unity
+    guid: 457f8f0ac636d274897dd8f9bc1244a8
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 05f7b6939d412d749b62bb04d081a05c
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 37e122b0afa91a445929586edd21e55f
   m_configObjects: {}

@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class RockController : Loopable
 {
+
+
     [SerializeField]
     public float MoveSpeed = 10;
     [SerializeField]
@@ -11,6 +14,8 @@ public class RockController : Loopable
 
     private Vector3 startPos;
     private LineRenderer lineRenderer;
+
+    public GameController controller;
 
     // Start is called before the first frame update
     void Start()
@@ -31,15 +36,11 @@ public class RockController : Loopable
         temp.z = direction;
         transform.rotation = temp;
     }
-
-    // Update is called once per frame
-    void Update()
+ 
+    void UpdateAsteroid()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            DoReset();
-        }
 
+        if (controller.canMove)
         {
             float mult = Accel * Time.deltaTime;
             var pos = transform.position;
@@ -48,6 +49,16 @@ public class RockController : Loopable
             pos.y += Mathf.Cos(angle) * MoveSpeed * mult;
             transform.position = pos;
         }
+    }
+    // Update is called once per frame
+    void Update()
+    {
+
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    DoReset();
+        //}
+        UpdateAsteroid();
 
         CorrectPosition(lineRenderer);
     }

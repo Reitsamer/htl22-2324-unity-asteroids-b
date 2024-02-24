@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1706430572266571273}
   - component: {fileID: 1706430572266571276}
   - component: {fileID: 1706430572266571278}
+  - component: {fileID: 2762551662301482612}
   m_Layer: 0
   m_Name: Spaceship
   m_TagString: Untagged
@@ -49,7 +50,11 @@ MonoBehaviour:
   RotSpeed: 400
   MoveSpeed: 12
   bulletPrefab: {fileID: 7749017391893647860, guid: 6bb57cfa70eceb84d8c0c62fb8bda615, type: 3}
+  gameController: {fileID: 0}
   Accel: 0
+  AddToScore:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!120 &1706430572266571276
 LineRenderer:
   serializedVersion: 2
@@ -207,3 +212,30 @@ PolygonCollider2D:
       - {x: 0.3025116, y: -0.42617577}
       - {x: 1.2926189, y: -1.0399042}
   m_UseDelaunayMesh: 0
+--- !u!50 &2762551662301482612
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706430572266571277}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0.1
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

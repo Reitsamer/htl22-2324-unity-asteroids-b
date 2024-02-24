@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BulletMove : Loopable
 {
@@ -11,6 +12,9 @@ public class BulletMove : Loopable
 
     private SpriteRenderer spriteRenderer;
     private bool loopedOnce;
+
+    public GameController controller;
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,14 +30,18 @@ public class BulletMove : Loopable
     // Update is called once per frame
     void Update()
     {
+        if (!controller.canMove)
         {
-            float mult = Accel * Time.deltaTime;
-            var pos = transform.position;
-            var angle = (transform.eulerAngles.z * Mathf.PI) / 180;
-            pos.x -= Mathf.Sin(angle) * MoveSpeed * mult;
-            pos.y += Mathf.Cos(angle) * MoveSpeed * mult;
-            transform.position = pos;
+            return;
         }
+
+        float mult = Accel * Time.deltaTime;
+        var pos = transform.position;
+        var angle = (transform.eulerAngles.z * Mathf.PI) / 180;
+
+        pos.x -= Mathf.Sin(angle) * MoveSpeed * mult;
+        pos.y += Mathf.Cos(angle) * MoveSpeed * mult;
+        transform.position = pos;
 
         if (CorrectPosition(spriteRenderer))
         {
@@ -49,8 +57,13 @@ public class BulletMove : Loopable
         var rock = other.GetComponent<RockCreator>();
         if (rock != null)
         {
+            AddScore(rock.GetSize());
             Destroy(gameObject);
             rock.HandleShoot();
         }
+    }
+    void AddScore(float size)
+    {
+        Highscore.Instance.IncreaseScore(size);
     }
 }

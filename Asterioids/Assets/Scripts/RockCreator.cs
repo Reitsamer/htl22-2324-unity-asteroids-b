@@ -1,34 +1,56 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
+
+
+public class RockSizeArgs : EventArgs
+{
+    public float size;
+
+    public RockSizeArgs(float size)
+    {
+        this.size = size;
+    }
+}
+
 
 [RequireComponent(typeof(LineRenderer), typeof(PolygonCollider2D))]
 public class RockCreator : MonoBehaviour
 {
     [SerializeField]
-    private int vertices = 1;
+    public int vertices = 7;
     [SerializeField]
-    private float threshold = 4;
+    public float threshold = 4;
     [SerializeField]
-    private float speed = 1;
+    public float speed = 0.3f;
     [SerializeField]
-    private float startSize = 4;
+    public float startSize = 3;
 
     [SerializeField]
     private GameObject RockPrefab;
 
-    private float randomStartDeformation = 1;
+    public float randomStartDeformation = 1;
     private LineRenderer lineRenderer;
     private PolygonCollider2D polygonCollider2D;
     private Vector3[] rockPoints;
+    public RockSpawner spawner;
 
-    private bool isClone = false;
+    public bool isClone = false;
+
+    public EventHandler<RockSizeArgs> SendMessageToPlayer;
+
+    [SerializeField]
+    public ParticleSystem ExplodeParticle;
 
     void Start()
     {
+        ExplodeParticle.Stop();
         RegenerateRock();
+        transform.parent = spawner.transform;
     }
 
     void OnValidate()
@@ -90,8 +112,11 @@ public class RockCreator : MonoBehaviour
             .ToArray());
     }
 
+
+
     public void HandleShoot()
     {
+
         if (!isClone)
             for (int i = 0; i < 2; i++)
             {
@@ -102,11 +127,30 @@ public class RockCreator : MonoBehaviour
                 rockCreator.startSize /= 2;
                 rockCreator.threshold /= 1.5f;
                 rockCreator.isClone = true;
+                rockCreator.spawner = spawner;
 
                 var rockController = rock.GetComponent<RockController>();
                 rockController.MoveSpeed *= 1.8f;
+                rockController.controller = spawner.controller;
+                spawner.RockCreated();
             }
 
+        ExplodeParticle.Stop();
+        ExplodeParticle.Play();
+        polygonCollider2D.enabled = false;
+        lineRenderer.enabled = false;
+
+        Invoke("DestroySoon", 0.5f);
+    }
+
+    public void DestroySoon()
+    {
+        spawner.RockShot();
         Destroy(gameObject);
+    }
+
+    public float GetSize()
+    {
+        return startSize;
     }
 }
