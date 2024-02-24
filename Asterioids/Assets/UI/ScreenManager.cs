@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using UnityEditor;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class ScreenManager : MonoBehaviour
@@ -10,6 +13,9 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject highscoreMenu;
     [SerializeField] GameObject creditsScreen;
+
+    [SerializeField] SceneAsset MainMenuScene;
+    [SerializeField] SceneAsset MainGameScene;
 
     public UnityEvent start;
 
@@ -25,6 +31,8 @@ public class ScreenManager : MonoBehaviour
         playButton.clicked += () =>
         {
             start.Invoke();
+            SceneManager.LoadScene(MainGameScene.name);
+            SceneManager.UnloadSceneAsync(MainMenuScene.name);
         };
 
         highscoreButton.clicked += () =>
