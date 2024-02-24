@@ -1668,7 +1668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2123304951883144387, guid: a7a9405dce285ca48a196b047ef5e4c8, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2123304951883144387, guid: a7a9405dce285ca48a196b047ef5e4c8, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.size
@@ -1676,11 +1676,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2123304951883144387, guid: a7a9405dce285ca48a196b047ef5e4c8, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.25
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 2123304951883144387, guid: a7a9405dce285ca48a196b047ef5e4c8, type: 3}
       propertyPath: InitialModule.startSpeed.minScalar
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2123304951883144387, guid: a7a9405dce285ca48a196b047ef5e4c8, type: 3}
       propertyPath: InitialModule.gravityModifier.scalar
