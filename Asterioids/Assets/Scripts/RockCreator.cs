@@ -43,8 +43,12 @@ public class RockCreator : MonoBehaviour
 
     public EventHandler<RockSizeArgs> SendMessageToPlayer;
 
+    [SerializeField]
+    public ParticleSystem ExplodeParticle;
+
     void Start()
     {
+        ExplodeParticle.Stop();
         RegenerateRock();
         transform.parent = spawner.transform;
     }
@@ -108,6 +112,8 @@ public class RockCreator : MonoBehaviour
             .ToArray());
     }
 
+
+
     public void HandleShoot()
     {
 
@@ -128,6 +134,9 @@ public class RockCreator : MonoBehaviour
                 rockController.controller = spawner.controller;
                 spawner.RockCreated();
             }
+
+        ExplodeParticle.Stop();
+        ExplodeParticle.Play();
 
         spawner.RockShot();
         Destroy(gameObject);
