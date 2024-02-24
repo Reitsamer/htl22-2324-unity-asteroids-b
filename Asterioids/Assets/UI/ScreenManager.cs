@@ -1,30 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class ScreenManager : MonoBehaviour
 {
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject highscoreMenu;
+    [SerializeField] GameObject creditsScreen;
 
+    public UnityEvent start;
 
     // Start is called before the first frame update
     void Start()
     {
-        var rootScore = highscoreMenu.GetComponent<UIDocument>().rootVisualElement;
-
-        var backButton = rootScore.Q<Button>("back");
-
-        backButton.clicked += () =>
-        {
-            mainMenu.SetActive(true); ;
-
-            highscoreMenu.SetActive(false);
-        };
-
-        highscoreMenu.SetActive(false);
-
         var rootMain = mainMenu.GetComponent<UIDocument>().rootVisualElement;
 
         var playButton = rootMain.Q<Button>("play");
@@ -33,19 +24,21 @@ public class ScreenManager : MonoBehaviour
 
         playButton.clicked += () =>
         {
-            //todo game scene loader
+            start.Invoke();
         };
 
-        highscoreButton.clicked += () => 
+        highscoreButton.clicked += () =>
         {
-            highscoreMenu.SetActive(true);
+            highscoreMenu.GetComponent<UIDocument>().rootVisualElement.style.display = DisplayStyle.Flex;
 
-            mainMenu.SetActive(false);
+            mainMenu.GetComponent<UIDocument>().rootVisualElement.style.display = DisplayStyle.None;
         };
 
-        creditsButton.clicked += () => 
+        creditsButton.clicked += () =>
         {
-            //todo
+            creditsScreen.GetComponent<UIDocument>().rootVisualElement.style.display = DisplayStyle.Flex;
+
+            mainMenu.GetComponent<UIDocument>().rootVisualElement.style.display = DisplayStyle.None;
         };
 
 

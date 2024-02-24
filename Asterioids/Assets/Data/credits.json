@@ -1,0 +1,39 @@
+{"credits":[
+	{
+		"task":"Music & Sound",
+		"names":[
+			"test1",
+			"test1"	
+		]
+	},
+	{
+		"task":"Gameplay",
+		"names":[
+			"test1",
+			"test1"	
+		]
+	},
+	{
+		"task":"FX",
+		"names":[
+			"test1",
+			"test1"	
+		]
+
+	},
+	{
+		"task":"Level Design",
+		"names":[
+			"test1",
+			"test1"	
+		]
+	},
+	{
+		"task":"UI",
+		"names":[
+			"Filip Paunovic",
+			"test1"	
+		]
+	}
+]
+}
