@@ -115,13 +115,13 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 2.9513426, z: 0}
-  - {x: -1.625897, y: 1.2966098, z: 0}
-  - {x: -3.0584574, y: -0.6980726, z: 0}
-  - {x: -1.2951658, y: -2.68944, z: 0}
-  - {x: 1.3455201, y: -2.794003, z: 0}
-  - {x: 4.010511, y: -0.9153731, z: 0}
-  - {x: 2.1877658, y: 1.7446861, z: 0}
+  - {x: 0, y: 3.4992363, z: 0}
+  - {x: -3.1546686, y: 2.5157642, z: 0}
+  - {x: -2.5256824, y: -0.5764702, z: 0}
+  - {x: -1.5007744, y: -3.116391, z: 0}
+  - {x: 1.3378557, y: -2.7780876, z: 0}
+  - {x: 3.2660155, y: -0.7454468, z: 0}
+  - {x: 2.4883516, y: 1.9843955, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -234,13 +234,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 2.9513426}
-      - {x: -1.625897, y: 1.2966098}
-      - {x: -3.0584574, y: -0.6980726}
-      - {x: -1.2951658, y: -2.68944}
-      - {x: 1.3455201, y: -2.794003}
-      - {x: 4.010511, y: -0.9153731}
-      - {x: 2.1877658, y: 1.7446861}
+    - - {x: 0, y: 3.4992363}
+      - {x: -3.1546686, y: 2.5157642}
+      - {x: -2.5256824, y: -0.5764702}
+      - {x: -1.5007744, y: -3.116391}
+      - {x: 1.3378557, y: -2.7780876}
+      - {x: 3.2660155, y: -0.7454468}
+      - {x: 2.4883516, y: 1.9843955}
   m_UseDelaunayMesh: 0
 --- !u!1001 &9099748122210206103
 PrefabInstance:
@@ -250,6 +250,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9032371507964214312}
     m_Modifications:
+    - target: {fileID: 4749977600221960812, guid: 86dbb24599df2c04a84f944da17d7979, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749977600221960812, guid: 86dbb24599df2c04a84f944da17d7979, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7335015792075517274, guid: 86dbb24599df2c04a84f944da17d7979, type: 3}
       propertyPath: m_Name
       value: Asteoridenexplosition

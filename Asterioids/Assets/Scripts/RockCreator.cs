@@ -137,7 +137,14 @@ public class RockCreator : MonoBehaviour
 
         ExplodeParticle.Stop();
         ExplodeParticle.Play();
+        polygonCollider2D.enabled = false;
+        lineRenderer.enabled = false;
 
+        Invoke("DestroySoon", 0.5f);
+    }
+
+    public void DestroySoon()
+    {
         spawner.RockShot();
         Destroy(gameObject);
     }
