@@ -20,6 +20,8 @@ public class SpaceshipController : Loopable, IStartStop
     public GameObject bulletPrefab;
     [SerializeField]
     private GameController gameController;
+    [SerializeField]
+    public ParticleSystem BoostEffect;
 
     public float Accel = 0;
     private Vector3 AccelVec = Vector3.zero;
@@ -115,6 +117,23 @@ public class SpaceshipController : Loopable, IStartStop
         }
 
         rb.AddForce(rb.transform.up * forward);
+
+        if (forward > 0)
+        {
+            if (!BoostEffect.main.loop || !BoostEffect.isPlaying)
+            {
+                BoostEffect.loop = true;
+                BoostEffect.Play();
+            }
+        }
+        else
+        {
+            if (BoostEffect.main.loop)
+            {
+                BoostEffect.loop = false;
+                BoostEffect.Stop();
+            }
+        }
     }
     public void StartGame()
     {
@@ -122,7 +141,6 @@ public class SpaceshipController : Loopable, IStartStop
         rb.velocity = Vector3.zero;
         rb.angularVelocity = 0;
         lineRenderer.enabled = true;
-
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
