@@ -249,6 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 1053661584}
+  scoreCsv: {fileID: 4900000, guid: 34992b5c8fa7a00489c2b0f42c592542, type: 3}
 --- !u!1 &1053661584
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,6 +349,9 @@ MonoBehaviour:
   mainMenu: {fileID: 1053661584}
   highscoreMenu: {fileID: 969565931}
   creditsScreen: {fileID: 441651850}
+  start:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1244504752
 GameObject:
   m_ObjectHideFlags: 0
