@@ -1,5 +1,5 @@
 .score-entry {
-    font-size: 40%;
+    font-size: 20%;
     -unity-font-style: italic;
     -unity-text-align: upper-center;
     padding-bottom: 4%;

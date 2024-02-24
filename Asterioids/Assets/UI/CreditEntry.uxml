@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1; margin-bottom: 20%; padding-bottom: 0;">
-        <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="credit" style="-unity-text-align: upper-center; font-size: 60%; color: rgb(255, 255, 255); -unity-font-style: bold;" />
-        <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="names" style="font-size: 30%; -unity-text-align: upper-center; color: rgb(255, 255, 255); margin-bottom: 2%; padding-bottom: 2%;" />
+    <ui:VisualElement style="flex-grow: 1; margin-bottom: 10%; padding-bottom: 0;">
+        <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="credit" style="-unity-text-align: upper-center; font-size: 25%; color: rgb(255, 255, 255); -unity-font-style: bold;" />
+        <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="names" style="font-size: 10%; -unity-text-align: upper-center; color: rgb(255, 255, 255); margin-bottom: 2%; padding-bottom: 2%;" />
     </ui:VisualElement>
 </ui:UXML>

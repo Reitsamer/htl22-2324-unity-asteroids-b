@@ -17,7 +17,7 @@ public class CreditEntryController
     {
         Credit.text = credit.task;
 
-        Names.text = string.Join(" ", credit.names);
+        Names.text = string.Join("\n", credit.names);
 
         
     }
